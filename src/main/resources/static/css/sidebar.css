@@ -1,0 +1,54 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: #1e3a8a;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: left 0.3s ease;
+}
+
+.sidebar-header {
+  padding: 25px;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  text-decoration: none;
+  padding: 18px 25px;
+  transition: 0.3s;
+}
+
+.sidebar-menu a:hover {
+  background: #2952cc;
+}
+
+.sidebar-menu .active {
+  background: #2952cc;
+  border-left: 4px solid gold;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  z-index: 999;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}

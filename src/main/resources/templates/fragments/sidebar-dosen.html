@@ -1,0 +1,64 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div th:fragment="sidebar">
+      <div
+        class="bg-dark text-white rounded shadow p-3"
+        style="min-height: 95vh"
+      >
+        <h4 class="text-center mb-4">🎓 DOSEN</h4>
+
+        <div class="list-group">
+          <a
+            th:href="@{/dosen/dashboard}"
+            class="list-group-item list-group-item-action"
+          >
+            🏠 Dashboard
+          </a>
+
+          <a
+            th:href="@{/dosen/skripsi}"
+            class="list-group-item list-group-item-action"
+          >
+            📄 Data Skripsi
+          </a>
+
+          <a
+            th:href="@{/dosen/progress}"
+            class="list-group-item list-group-item-action"
+          >
+            📈 Monitoring Progress
+          </a>
+
+          <a
+            th:href="@{/dosen/bimbingan}"
+            class="list-group-item list-group-item-action"
+          >
+            💬 Bimbingan
+          </a>
+
+          <a
+            th:href="@{/dosen/laporan}"
+            class="list-group-item list-group-item-action"
+          >
+            📊 Laporan
+          </a>
+
+          <a
+            th:href="@{/dosen/profil}"
+            class="list-group-item list-group-item-action"
+          >
+            👤 Profil
+          </a>
+
+          <a
+            th:href="@{/logout}"
+            class="list-group-item list-group-item-action text-danger"
+          >
+            🚪 Logout
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

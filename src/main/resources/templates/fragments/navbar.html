@@ -1,0 +1,14 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
+      <nav class="navbar navbar-dark bg-dark navbar-fixed px-3">
+        <span class="navbar-brand">Skripsi Monitoring</span>
+
+        <div class="text-white">
+          <span th:text="${#authentication.name}"></span>
+        </div>
+      </nav>
+    </div>
+  </body>
+</html>

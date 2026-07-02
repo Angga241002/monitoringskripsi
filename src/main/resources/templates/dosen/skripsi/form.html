@@ -1,0 +1,77 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tambah Progress</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h3>Tambah Progress Skripsi</h3>
+      <hr />
+
+      <form
+        th:action="@{'/dosen/progress/simpan/' + ${skripsiId}}"
+        method="post"
+      >
+        <div class="mb-3">
+          <label>Bab</label>
+          <input type="text" name="bab" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label>Judul Progress</label>
+          <input
+            type="text"
+            name="judulProgress"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label>Persentase (%)</label>
+          <input
+            type="number"
+            name="persentase"
+            class="form-control"
+            min="0"
+            max="100"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label>Catatan</label>
+          <textarea name="catatan" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label>Tanggal</label>
+          <input type="date" name="tanggal" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+          <label>Status</label>
+          <select name="status" class="form-control">
+            <option value="PROSES">PROSES</option>
+            <option value="REVISI">REVISI</option>
+            <option value="ACC">ACC</option>
+          </select>
+        </div>
+
+        <button class="btn btn-success">Simpan</button>
+        <a
+          th:href="@{'/dosen/progress/' + ${skripsiId}}"
+          class="btn btn-secondary"
+        >
+          Kembali
+        </a>
+      </form>
+    </div>
+  </body>
+</html>

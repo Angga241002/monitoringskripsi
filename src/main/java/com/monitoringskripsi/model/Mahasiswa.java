@@ -1,0 +1,90 @@
+package com.monitoringskripsi.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "mahasiswa")
+public class Mahasiswa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String nim;
+
+    @Column(nullable = false)
+    private String nama;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String prodi;
+
+    @Column(nullable = false)
+    private Integer angkatan;
+
+    @Column(name = "user_id")
+    private Long userId;
+
+    public Mahasiswa() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProdi() {
+        return prodi;
+    }
+
+    public void setProdi(String prodi) {
+        this.prodi = prodi;
+    }
+
+    public Integer getAngkatan() {
+        return angkatan;
+    }
+
+    public void setAngkatan(Integer angkatan) {
+        this.angkatan = angkatan;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+}

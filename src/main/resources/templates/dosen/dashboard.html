@@ -1,0 +1,77 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard Dosen</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Navbar (nanti kita buat) -->
+    <!-- <div th:replace="fragments/navbar :: navbar"></div> -->
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 p-0">
+          <div th:replace="fragments/sidebar-dosen :: sidebar"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="col-md-9 col-lg-10 p-4">
+          <h2>Dashboard Dosen</h2>
+          <hr />
+
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                  <h5>Total Skripsi</h5>
+                  <h2 th:text="${totalSkripsi}">0</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                  <h5>Total Progress</h5>
+                  <h2 th:text="${totalProgress}">0</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                  <h5>ACC</h5>
+                  <h2 th:text="${totalAcc}">0</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <div class="card bg-danger text-white">
+                <div class="card-body text-center">
+                  <h5>REVISI</h5>
+                  <h2 th:text="${totalRevisi}">0</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-3">
+            <div class="card-body">
+              <h5>Progress Berstatus PROSES</h5>
+              <h3 th:text="${totalProses}">0</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

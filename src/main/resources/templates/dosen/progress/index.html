@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Monitoring Progress Skripsi</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h2>Monitoring Progress Skripsi</h2>
+
+      <hr />
+
+      <!-- Tombol tambah progress -->
+      <a
+        th:href="@{'/dosen/progress/tambah/' + ${skripsiId}}"
+        class="btn btn-primary mb-3"
+      >
+        + Tambah Progress
+      </a>
+
+      <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+          <tr>
+            <th>No</th>
+            <th>Bab</th>
+            <th>Judul Progress</th>
+            <th>Persentase</th>
+            <th>Catatan</th>
+            <th>Tanggal</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="p, stat : ${progressList}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${p.bab}"></td>
+            <td th:text="${p.judulProgress}"></td>
+            <td th:text="${p.persentase + '%'}"></td>
+            <td th:text="${p.catatan}"></td>
+            <td th:text="${p.tanggal}"></td>
+
+            <!-- STATUS -->
+            <td>
+              <span
+                class="badge"
+                th:text="${p.status}"
+                th:classappend="${
+                          p.status == 'ACC' ? ' bg-success' :
+                          p.status == 'REVISI' ? ' bg-danger' :
+                          ' bg-warning'
+                      }"
+              >
+              </span>
+            </td>
+
+            <!-- AKSI -->
+            <td>
+              <a
+                th:href="@{'/dosen/progress/acc/' + ${p.id}}"
+                class="btn btn-success btn-sm"
+              >
+                ACC
+              </a>
+
+              <a
+                th:href="@{'/dosen/progress/revisi/' + ${p.id}}"
+                class="btn btn-warning btn-sm"
+              >
+                Revisi
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
