@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Login - Monitoring Skripsi</title>
+
+    <link rel="stylesheet" href="./assets/css/login.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-header">
+          <i class="fa-solid fa-graduation-cap logo"></i>
+
+          <h2>Monitoring Skripsi</h2>
+
+          <p>Silahkan login untuk melanjutkan</p>
+        </div>
+
+        <form id="loginForm">
+          <div class="input-group">
+            <label>Username</label>
+
+            <input
+              type="text"
+              id="username"
+              placeholder="Masukkan username"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+
+            <input
+              type="password"
+              id="password"
+              placeholder="Masukkan password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-login">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Login
+          </button>
+        </form>
+
+        <div id="message"></div>
+      </div>
+    </div>
+
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/login.js"></script>
+  </body>
+</html>

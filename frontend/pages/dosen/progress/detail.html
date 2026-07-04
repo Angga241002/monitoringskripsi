@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Detail Progress</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../../assets/css/sidebar.css" />
+    <link rel="stylesheet" href="../../../assets/css/dashboard.css" />
+    <link rel="stylesheet" href="../../../assets/css/responsive.css" />
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main -->
+    <div class="main-content">
+      <div class="topbar">
+        <h3>
+          <i class="fa-solid fa-file-lines"></i>
+          Detail Progress Skripsi
+        </h3>
+
+        <button class="btn btn-danger" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
+
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          Detail Progress Mahasiswa
+        </div>
+
+        <div class="card-body">
+          <form id="formProgress">
+            <input type="hidden" id="progressId" />
+
+            <div class="mb-3">
+              <label class="form-label">Mahasiswa</label>
+
+              <input type="text" id="mahasiswa" class="form-control" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Judul Skripsi</label>
+
+              <input type="text" id="judul" class="form-control" readonly />
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label class="form-label">BAB</label>
+
+                <input type="text" id="bab" class="form-control" readonly />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Persentase</label>
+
+                <input
+                  type="number"
+                  id="persentase"
+                  class="form-control"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <br />
+
+            <div class="mb-3">
+              <label class="form-label">Judul Progress</label>
+
+              <input
+                type="text"
+                id="judulProgress"
+                class="form-control"
+                readonly
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Catatan Mahasiswa</label>
+
+              <textarea
+                id="catatan"
+                class="form-control"
+                rows="5"
+                readonly
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Komentar Dosen</label>
+
+              <textarea
+                id="komentarDosen"
+                class="form-control"
+                rows="5"
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Status Progress</label>
+
+              <select id="status" class="form-select">
+                <option value="PROSES">PROSES</option>
+
+                <option value="ACC">ACC</option>
+
+                <option value="REVISI">REVISI</option>
+              </select>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <a href="index.html" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Kembali
+              </a>
+
+              <button type="submit" class="btn btn-success">
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Simpan Validasi
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../../assets/js/config.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        if (!user) {
+          location.href = "../../../login.html";
+          return;
+        }
+
+        // load sidebar
+        const sidebar = await fetch("../../../components/sidebar-dosen.html");
+
+        document.getElementById("sidebar-container").innerHTML =
+          await sidebar.text();
+
+        const nama = document.getElementById("namaDosen");
+
+        if (nama) nama.innerText = user.nama;
+
+        const menu = document.getElementById("menu-progress");
+
+        if (menu) menu.classList.add("active");
+
+        const logout = document.getElementById("logoutBtn2");
+
+        if (logout) {
+          logout.onclick = () => {
+            localStorage.removeItem("user");
+
+            location.href = "../../../login.html";
+          };
+        }
+
+        loadDetail();
+      });
+
+      const id = new URLSearchParams(window.location.search).get("id");
+
+      async function loadDetail() {
+        const response = await fetch(BASE_URL + "/progress/" + id);
+
+        const progress = await response.json();
+
+        document.getElementById("progressId").value = progress.id;
+
+        document.getElementById("mahasiswa").value =
+          progress.skripsi.mahasiswa.nama;
+
+        document.getElementById("judul").value = progress.skripsi.judul;
+
+        document.getElementById("bab").value = progress.bab;
+
+        document.getElementById("persentase").value = progress.persentase;
+
+        document.getElementById("judulProgress").value = progress.judulProgress;
+
+        document.getElementById("catatan").value = progress.catatan;
+
+        document.getElementById("komentarDosen").value =
+          progress.komentarDosen ?? "";
+
+        document.getElementById("status").value = progress.status;
+      }
+
+      document
+        .getElementById("formProgress")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const response = await fetch(BASE_URL + "/progress/" + id, {
+            method: "PUT",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              komentarDosen: document.getElementById("komentarDosen").value,
+
+              status: document.getElementById("status").value,
+            }),
+          });
+
+          if (response.ok) {
+            alert("Validasi berhasil disimpan.");
+
+            location.href = "index.html";
+          } else {
+            alert("Gagal menyimpan validasi.");
+          }
+        });
+
+      document.getElementById("logoutBtn").onclick = () => {
+        localStorage.removeItem("user");
+
+        location.href = "../../../login.html";
+      };
+    </script>
+  </body>
+</html>
