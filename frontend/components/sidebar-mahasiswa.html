@@ -1,86 +1,66 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <body>
-    <div th:fragment="sidebar">
-      <div class="list-group shadow-sm">
-        <h5>Mahasiswa</h5>
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <i class="fa-solid fa-graduation-cap"></i>
+    <h3>Monitoring Skripsi</h3>
+  </div>
 
-        <small th:text="${#authentication.name}">
-          Rinangga1977@email.com
-        </small>
-
-        <a
-          th:href="@{/mahasiswa/dashboard}"
-          class="list-group-item list-group-item-action"
-        >
-          🏠 Dashboard
-        </a>
-
-        <a
-          th:href="@{/mahasiswa/skripsi}"
-          class="list-group-item list-group-item-action"
-        >
-          📄 Skripsi Saya
-        </a>
-
-        <a
-          th:href="@{/mahasiswa/progress}"
-          class="list-group-item list-group-item-action"
-        >
-          📈 Progress Skripsi
-        </a>
-
-        <a
-          th:href="@{/mahasiswa/upload-dokumen}"
-          class="list-group-item list-group-item-action"
-        >
-          📂 Upload Dokumen
-        </a>
-
-        <a
-          th:href="@{/mahasiswa/riwayat}"
-          class="list-group-item list-group-item-action"
-        >
-          🕘 Riwayat Upload
-        </a>
-
-        <a
-          th:href="@{/mahasiswa/bimbingan}"
-          class="list-group-item list-group-item-action"
-        >
-          💬 Bimbingan Dosen
-        </a>
-
-        <a
-          th:href="@{/mahasiswa/jadwal}"
-          class="list-group-item list-group-item-action"
-        >
-          📅 Jadwal Bimbingan
-        </a>
-
-        <a
-          th:href="@{/mahasiswa/notifikasi}"
-          class="list-group-item list-group-item-action"
-        >
-          🔔 Notifikasi
-        </a>
-
-        <a
-          th:href="@{/mahasiswa/profil}"
-          class="list-group-item list-group-item-action"
-        >
-          👤 Profil
-        </a>
-
-        <form th:action="@{/logout}" method="post">
-          <button
-            type="submit"
-            class="list-group-item list-group-item-action text-danger border-0 bg-white w-100 text-start"
-          >
-            🚪 Logout
-          </button>
-        </form>
-      </div>
+  <div class="sidebar-profile">
+    <div class="profile-image">
+      <i class="fa-solid fa-user"></i>
     </div>
-  </body>
-</html>
+    <h5 id="namaMahasiswa">Mahasiswa</h5>
+    <small>Mahasiswa</small>
+  </div>
+
+  <div class="sidebar-menu">
+    <a href="/frontend/pages/mahasiswa/dashboard.html" id="menu-dashboard">
+      <i class="fa-solid fa-house"></i>
+      Dashboard
+    </a>
+
+    <a href="/frontend/pages/mahasiswa/skripsi.html" id="menu-skripsi">
+      <i class="fa-solid fa-book"></i>
+      Skripsi Saya
+    </a>
+
+    <a href="/frontend/pages/mahasiswa/progress.html" id="menu-progress">
+      <i class="fa-solid fa-chart-line"></i>
+      Progress Skripsi
+    </a>
+
+    <a href="/frontend/pages/mahasiswa/upload-dokumen.html" id="menu-upload">
+      <i class="fa-solid fa-folder-open"></i>
+      Upload Dokumen
+    </a>
+
+    <a href="/frontend/pages/mahasiswa/riwayat.html" id="menu-riwayat">
+      <i class="fa-solid fa-clock"></i>
+      Riwayat Upload
+    </a>
+
+    <a href="/frontend/pages/mahasiswa/bimbingan.html" id="menu-bimbingan">
+      <i class="fa-solid fa-comments"></i>
+      Bimbingan Dosen
+    </a>
+
+    <a href="/frontend/pages/mahasiswa/jadwal.html" id="menu-jadwal">
+      <i class="fa-solid fa-calendar-days"></i>
+      Jadwal Bimbingan
+    </a>
+
+    <a href="/frontend/pages/mahasiswa/notifikasi.html" id="menu-notifikasi">
+      <i class="fa-solid fa-bell"></i>
+      Notifikasi
+    </a>
+
+    <a href="/frontend/pages/mahasiswa/profil.html" id="menu-profil">
+      <i class="fa-solid fa-user"></i>
+      Profil
+    </a>
+
+    <button id="logoutBtn" class="btn btn-danger mt-4">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      Logout
+    </button>
+  </div>
+</div>

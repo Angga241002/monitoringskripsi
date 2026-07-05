@@ -1,10 +1,5 @@
 package com.monitoringskripsi.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class BimbinganDTO {
 
     private Long id;
@@ -15,4 +10,35 @@ public class BimbinganDTO {
 
     private String status;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMahasiswa() {
+        return mahasiswa;
+    }
+
+    public void setMahasiswa(String mahasiswa) {
+        this.mahasiswa = mahasiswa;
+    }
+
+    public String getJudul() {
+        return judul;
+    }
+
+    public void setJudul(String judul) {
+        this.judul = judul;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

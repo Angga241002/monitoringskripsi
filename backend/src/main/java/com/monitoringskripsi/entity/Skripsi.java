@@ -2,14 +2,8 @@ package com.monitoringskripsi.entity;
 
 import com.monitoringskripsi.enums.StatusSkripsi;
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Skripsi {
 
     @Id
@@ -28,4 +22,55 @@ public class Skripsi {
     @ManyToOne
     @JoinColumn(name = "dosen_id")
     private User dosen;
+
+    public Skripsi() {
+    }
+
+    public Skripsi(Long id, String judul, StatusSkripsi status, User mahasiswa, User dosen) {
+        this.id = id;
+        this.judul = judul;
+        this.status = status;
+        this.mahasiswa = mahasiswa;
+        this.dosen = dosen;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getJudul() {
+        return judul;
+    }
+
+    public void setJudul(String judul) {
+        this.judul = judul;
+    }
+
+    public StatusSkripsi getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusSkripsi status) {
+        this.status = status;
+    }
+
+    public User getMahasiswa() {
+        return mahasiswa;
+    }
+
+    public void setMahasiswa(User mahasiswa) {
+        this.mahasiswa = mahasiswa;
+    }
+
+    public User getDosen() {
+        return dosen;
+    }
+
+    public void setDosen(User dosen) {
+        this.dosen = dosen;
+    }
 }
