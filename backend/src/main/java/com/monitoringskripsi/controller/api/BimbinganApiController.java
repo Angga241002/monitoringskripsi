@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bimbingan")
-@CrossOrigin(origins = "*")
 public class BimbinganApiController {
 
     private final ProgressService progressService;

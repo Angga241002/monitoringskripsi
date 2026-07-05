@@ -10,7 +10,7 @@ import com.monitoringskripsi.entity.User;
 import com.monitoringskripsi.enums.Role;
 
 @Repository
-public interface MahasiswaRepository extends JpaRepository<User, Long> {
+public interface MahasiswaDosenRepository extends JpaRepository<User, Long> {
 
     List<User> findByRole(Role role);
 

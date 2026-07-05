@@ -1,7 +1,5 @@
 package com.monitoringskripsi.config;
 
-import java.time.LocalDateTime;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,19 +20,17 @@ public class DataInitializer {
 
             if (userRepository.count() == 0) {
 
-                User dosen = User.builder()
-                        .username("dosen")
-                        .password(passwordEncoder.encode("admin123"))
-                        .role(Role.DOSEN)
-                        .status(true)
-                        .build();
+                User dosen = new User();
+                dosen.setUsername("dosen");
+                dosen.setPassword(passwordEncoder.encode("admin123"));
+                dosen.setRole(Role.DOSEN);
+                dosen.setStatus(true);
 
-                User mahasiswa = User.builder()
-                        .username("mahasiswa")
-                        .password(passwordEncoder.encode("admin123"))
-                        .role(Role.MAHASISWA)
-                        .status(true)
-                        .build();
+                User mahasiswa = new User();
+                mahasiswa.setUsername("mahasiswa");
+                mahasiswa.setPassword(passwordEncoder.encode("admin123"));
+                mahasiswa.setRole(Role.MAHASISWA);
+                mahasiswa.setStatus(true);
 
                 userRepository.save(dosen);
                 userRepository.save(mahasiswa);

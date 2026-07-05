@@ -39,7 +39,7 @@
           </h4>
         </div>
 
-        <div class="d-flex gap-2">
+          <div class="d-flex gap-2">
           <input
             type="text"
             id="searchInput"
@@ -50,7 +50,7 @@
 
           <button
             class="btn btn-success"
-            onclick="window.location.href = 'tambah-mahasiswa.html'"
+            id="btnTambahMahasiswa"
           >
             <i class="fa-solid fa-plus"></i>
             Tambah
@@ -106,5 +106,50 @@
 
     <!-- Mahasiswa -->
     <script src="../../assets/js/mahasiswa.js"></script>
+
+    <!-- Create/Edit Modal -->
+    <div class="modal fade" id="mahasiswaModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="mahasiswaModalTitle">Form Mahasiswa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formMahasiswaModal">
+              <input type="hidden" id="modalMahasiswaId" />
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label>NIM</label>
+                  <input type="text" id="modalNim" class="form-control" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label>Nama</label>
+                  <input type="text" id="modalNama" class="form-control" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label>Email</label>
+                  <input type="email" id="modalEmail" class="form-control" />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label>Prodi</label>
+                  <input type="text" id="modalProdi" class="form-control" />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label>Angkatan</label>
+                  <input type="number" id="modalAngkatan" class="form-control" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-primary" id="modalSaveBtn">Simpan</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

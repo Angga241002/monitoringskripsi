@@ -1,196 +1,164 @@
 <!doctype html>
-<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Mahasiswa</title>
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" th:href="@{/css/sidebar.css}" />
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
-    <link rel="stylesheet" th:href="@{/css/responsive.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/sidebar.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <link rel="stylesheet" href="../../assets/css/responsive.css" />
   </head>
-
   <body>
-    <!-- ================= SIDEBAR ================= -->
-
-    <div class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <h3>🎓 Monitoring Skripsi</h3>
-      </div>
-
-      <div class="sidebar-menu">
-        <a th:href="@{/dosen/dashboard}">
-          <i class="fa-solid fa-house"></i>
-          Dashboard
-        </a>
-
-        <a th:href="@{/dosen/mahasiswa}" class="active">
-          <i class="fa-solid fa-user-graduate"></i>
-          Data Mahasiswa
-        </a>
-
-        <a href="#">
-          <i class="fa-solid fa-book-open"></i>
-          Data Skripsi
-        </a>
-
-        <a href="#">
-          <i class="fa-solid fa-chart-line"></i>
-          Monitoring Progress
-        </a>
-
-        <a href="#">
-          <i class="fa-solid fa-comments"></i>
-          Bimbingan
-        </a>
-
-        <a href="#">
-          <i class="fa-solid fa-file-lines"></i>
-          Laporan
-        </a>
-
-        <a href="#">
-          <i class="fa-solid fa-user"></i>
-          Profil
-        </a>
-      </div>
-    </div>
-
-    <div class="overlay" id="overlay"></div>
-
-    <!-- ================= MAIN ================= -->
-
+    <div id="sidebar-container"></div>
     <div class="main-content">
       <div class="topbar">
         <div class="d-flex align-items-center gap-3">
           <button class="btn btn-primary d-lg-none" id="toggleSidebar">
             <i class="fa-solid fa-bars"></i>
           </button>
-
           <h3 class="m-0">Edit Mahasiswa</h3>
         </div>
-
-        <form th:action="@{/logout}" method="post">
-          <button class="btn btn-danger">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            Logout
-          </button>
-        </form>
+        <button class="btn btn-danger" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
       </div>
-
       <div class="card shadow">
         <div class="card-header bg-warning">
           <h5 class="mb-0">Form Edit Mahasiswa</h5>
         </div>
-
         <div class="card-body">
-          <form
-            th:action="@{/dosen/mahasiswa/update}"
-            th:object="${mahasiswa}"
-            method="post"
-          >
-            <input type="hidden" th:field="*{id}" />
-
+          <form id="formMahasiswa">
+            <input type="hidden" id="mahasiswaId" />
             <div class="mb-3">
               <label>NIM</label>
-
-              <input
-                type="text"
-                class="form-control"
-                th:field="*{nim}"
-                required
-              />
+              <input type="text" id="nim" class="form-control" required />
             </div>
-
             <div class="mb-3">
               <label>Nama Mahasiswa</label>
-
-              <input
-                type="text"
-                class="form-control"
-                th:field="*{nama}"
-                required
-              />
+              <input type="text" id="nama" class="form-control" required />
             </div>
-
             <div class="mb-3">
               <label>Email</label>
-
-              <input
-                type="email"
-                class="form-control"
-                th:field="*{email}"
-                required
-              />
+              <input type="email" id="email" class="form-control" required />
             </div>
-
             <div class="mb-3">
               <label>Program Studi</label>
-
-              <input
-                type="text"
-                class="form-control"
-                th:field="*{prodi}"
-                required
-              />
+              <input type="text" id="prodi" class="form-control" required />
             </div>
-
             <div class="mb-4">
               <label>Angkatan</label>
-
-              <input
-                type="number"
-                class="form-control"
-                th:field="*{angkatan}"
-                required
-              />
+              <input type="number" id="angkatan" class="form-control" required />
             </div>
-
-            <button class="btn btn-warning">
+            <button class="btn btn-warning" type="submit">
               <i class="fa-solid fa-pen"></i>
-
               Update
             </button>
-
-            <a th:href="@{/dosen/mahasiswa}" class="btn btn-secondary">
+            <a href="mahasiswa.html" class="btn btn-secondary">
               <i class="fa-solid fa-arrow-left"></i>
-
               Kembali
             </a>
           </form>
         </div>
       </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="../../assets/js/config.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("overlay");
-        const toggle = document.getElementById("toggleSidebar");
+      function getQueryParam(name) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(name);
+      }
 
-        if (toggle) {
-          toggle.onclick = function () {
-            sidebar.classList.toggle("show");
-            overlay.classList.toggle("show");
-          };
+      async function loadMahasiswa(id) {
+        try {
+          const response = await fetch(`${BASE_URL}/mahasiswa/${id}`);
+          if (!response.ok) {
+            throw new Error("Mahasiswa tidak ditemukan");
+          }
+          const mahasiswa = await response.json();
+          document.getElementById("mahasiswaId").value = mahasiswa.id;
+          document.getElementById("nim").value = mahasiswa.nim || "";
+          document.getElementById("nama").value = mahasiswa.nama || "";
+          document.getElementById("email").value = mahasiswa.email || "";
+          document.getElementById("prodi").value = mahasiswa.prodi || "";
+          document.getElementById("angkatan").value = mahasiswa.angkatan || "";
+        } catch (err) {
+          console.error(err);
+          alert("Gagal memuat data mahasiswa.");
+          window.location.href = "mahasiswa.html";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const id = getQueryParam("id");
+        if (!id) {
+          alert("ID mahasiswa tidak ditemukan.");
+          window.location.href = "mahasiswa.html";
+          return;
         }
 
-        overlay.onclick = function () {
-          sidebar.classList.remove("show");
-          overlay.classList.remove("show");
+        fetch("../../components/sidebar-dosen.html")
+          .then((res) => res.text())
+          .then((html) => {
+            document.getElementById("sidebar-container").innerHTML = html;
+            const menu = document.getElementById("menu-mahasiswa");
+            if (menu) menu.classList.add("active");
+
+            const logoutBtn = document.getElementById("logoutBtn");
+            if (logoutBtn) {
+              logoutBtn.addEventListener("click", () => {
+                localStorage.removeItem("user");
+                window.location.href = "../../login.html";
+              });
+            }
+
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+            const toggle = document.getElementById("toggleSidebar");
+            if (toggle) {
+              toggle.onclick = () => {
+                sidebar.classList.toggle("show");
+                overlay.classList.toggle("show");
+              };
+            }
+          });
+
+        loadMahasiswa(id);
+      });
+
+      document.getElementById("formMahasiswa").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const id = document.getElementById("mahasiswaId").value;
+        const mahasiswa = {
+          nim: document.getElementById("nim").value,
+          nama: document.getElementById("nama").value,
+          email: document.getElementById("email").value,
+          prodi: document.getElementById("prodi").value,
+          angkatan: parseInt(document.getElementById("angkatan").value, 10),
         };
+
+        try {
+          const response = await fetch(`${BASE_URL}/mahasiswa/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(mahasiswa),
+          });
+
+          if (!response.ok) {
+            throw new Error("Gagal memperbarui mahasiswa");
+          }
+
+          alert("Mahasiswa berhasil diperbarui.");
+          window.location.href = "mahasiswa.html";
+        } catch (err) {
+          console.error(err);
+          alert("Gagal menyimpan perubahan.");
+        }
       });
     </script>
   </body>
